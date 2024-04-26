@@ -24,11 +24,27 @@ const slides = [
 const imgSlider = document.getElementById("bannerSliderImg");
 const dotsDiv = document.querySelector(".dots");
 
-// Going through the array and put a loop
+// Setting up the slides array and i count
 const sliderIndexTotal = slides.length;
 
 let i = 0;
 
+let allTheDots = [];
+
+// Add the dots to the dot div
+
+for (let k = 0; k < sliderIndexTotal; k++) {
+  let addTheElements = document.createElement("span");
+
+  addTheElements.classList.add("dot");
+  dotsDiv.appendChild(addTheElements);
+  allTheDots = document.querySelectorAll(".dot");
+  if (k === 0) {
+    addTheElements.classList.add("dot_selected");
+  }
+}
+
+//  Function that acts as a loop
 function moveSlide(move) {
   i = i + move;
   if (i > sliderIndexTotal - 1) {
@@ -39,18 +55,20 @@ function moveSlide(move) {
   }
   console.log(i);
   implementSlider();
+  selectedDot();
 }
 
 // The arrows behaviour on click
+
 const sliderArrows = document.querySelectorAll(".arrow");
 
 const arrowLeft = document.getElementById("arrowLeft");
 arrowLeft.addEventListener("click", () => {
-  [...slides][i].value === moveSlide(-1);
+  i === moveSlide(-1);
 });
 const arrowRight = document.getElementById("arrowRight");
 arrowRight.addEventListener("click", () => {
-  [...slides][i].value === moveSlide(1);
+  i === moveSlide(1);
 });
 
 // Function to change the path of images links
@@ -63,21 +81,11 @@ function implementSlider() {
   imgSlider.alt = currentTagLine;
 }
 
-// Add bullets
+// Function to select the current dot
 
-function addTheDots() {
-  let addTheElements = document.createElement("span");
-
-  addTheElements.classList.add("dot");
-  dotsDiv.appendchild(addTheElements);
+function selectedDot() {
+  allTheDots.forEach((element) => {
+    element.classList.remove("dot_selected");
+  });
+  allTheDots[i].classList.add("dot_selected");
 }
-
-// for (let i = 0; i < sliderIndexTotal; index++)
-slides.forEach((bullet, j) => {
-  addTheDots();
-  if (j === i) {
-    addTheElements.classList.add("dot_selected");
-  } else {
-    addTheElements.classList.remove("dot_selected");
-  }
-});
