@@ -22,6 +22,7 @@ const slides = [
 
 // Get the Image div and the dots div
 const imgSlider = document.getElementById("bannerSliderImg");
+let tagLine = document.getElementById("tagLine");
 const dotsDiv = document.querySelector(".dots");
 
 // Setting up the slides array and i count
@@ -60,8 +61,6 @@ function moveSlide(move) {
 
 // The arrows behaviour on click
 
-const sliderArrows = document.querySelectorAll(".arrow");
-
 const arrowLeft = document.getElementById("arrowLeft");
 arrowLeft.addEventListener("click", () => {
   i === moveSlide(-1);
@@ -78,7 +77,7 @@ function implementSlider() {
   let currentTagLine = slides[i]["tagLine"];
   const imgSliderPath = "./assets/images/slideshow/";
   imgSlider.src = imgSliderPath + currentImage;
-  imgSlider.alt = currentTagLine;
+  tagLine.innerHTML = currentTagLine;
 }
 
 // Function to select the current dot
